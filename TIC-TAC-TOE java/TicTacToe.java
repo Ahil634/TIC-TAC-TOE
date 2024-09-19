@@ -13,7 +13,7 @@ public class TicTacToe implements ActionListener{
     JButton[] buttons = new JButton[9];
     boolean player1_turn;
 
-    public TicTacToe(){
+    TicTacToe(){
     
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 800);
