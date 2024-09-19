@@ -1,3 +1,5 @@
+import random
+
 # Our board is a 3x3 array of dashes
 
 board = ["-","-","-",
@@ -16,7 +18,6 @@ def printBoard(board):
     print(board[3] + " | " + board[4] + " | " + board[5])
     print("----------")
     print(board[6] + " | " + board[7] + " | " + board[8])
-printBoard(board) 
 
 # take player input
 
@@ -24,6 +25,7 @@ def playerInput(board):
     inp = int(input("Enter a number 1-9 correlating to the board:"))
     if inp >= 1 and inp <= 9 and board[inp-1] == '-':
         board[inp-1] = currentPlayer
+        switchPlayer()
     else:
         print("Oops spot is already taken")
 
@@ -74,6 +76,7 @@ def checkWin():
     global gameRunning
     if checkHorizontal(board) or checkDiagonal(board) or checkRow(board):
         print(f"The winner is {winner}!")
+        printBoard(board)
         gameRunning = False
     
 
@@ -86,6 +89,15 @@ def switchPlayer():
     else:
         currentPlayer = 'X'
 
+# computer
+
+def computer(board):
+    while currentPlayer == 'O':
+        position = random.randint(0, 8)
+        if board[position] == '-':
+            board[position] = 'O'
+            switchPlayer()
+
 # check for win or tie again
 
 while gameRunning:
@@ -93,4 +105,6 @@ while gameRunning:
     playerInput(board)
     checkWin()
     checkTie(board)
-    switchPlayer()
+    computer(board)
+    checkWin()
+    checkTie(board)
